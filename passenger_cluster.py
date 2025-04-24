@@ -75,10 +75,11 @@ class clusterGenerator:
 
         return G
 
-    def extract_clusters(self):
+      def extract_clusters(self):
         """
-        After graph construction, extract connected components as request clusters
+        After graph construction, extract maximal cliques as request clusters.
+        Each clique is a fully connected subgraph of requests.
         """
         G = self.create_subgraph()
-        clusters = list(nx.connected_components(G))  # each is a set of node indices
-        return clusters
+        cliques = list(nx.find_cliques(G))  # returns all maximal cliques
+        return cliques
